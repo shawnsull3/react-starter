@@ -25,7 +25,7 @@ class App extends React.Component {
 
   handleSubmit() {
     let searchResult = [];
-    this.state.movies.map((movie) => {
+    movies.map((movie) => {
       if (movie.title.indexOf(this.state.text) !== -1){
         searchResult.push(movie);
       }
