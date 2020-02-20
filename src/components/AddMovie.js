@@ -5,6 +5,7 @@ var AddMovie = (props) => (
       <input 
       className="inputbar" 
       type="text"
+      placeholder="Add movie title here"
       onChange={(e)=>props.handleInput(e)}
       />
       <button 

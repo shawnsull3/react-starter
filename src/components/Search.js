@@ -5,6 +5,7 @@ var Search = (props) => (
       <input 
       className="searchbar" 
       type="text"
+      placeholder="Search..."
       onChange={(e)=>props.handleText(e)}
       />
       <button 
