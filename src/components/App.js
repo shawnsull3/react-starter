@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './Search.js';
 import '../main.css';
+import MovieList from './MovieList.js';
 
 var movies = [
   {title: 'Mean Girls'},
@@ -14,7 +15,7 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      movies: movies,
+      movies: movies, //array of objs
       text: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,13 +24,18 @@ class App extends React.Component {
   }
 
   handleSubmit() {
-    
+    let searchResult = [];
+    this.state.movies.map((movie) => {
+      if (movie.title.indexOf(this.state.text) !== -1){
+        searchResult.push(movie);
+      }
+    })
+    this.setState({movies: searchResult});
   }
 
   handleText (e) {
     this.setState({ text: e.target.value });
   }
-
 
   render(){
     return(
@@ -41,12 +47,8 @@ class App extends React.Component {
             handleSubmit={this.handleSubmit}/>
           </div>
         </nav>
-        <div className="movieList">
-          <div className="title">{movies[0].title}</div>
-          <div className="title">{movies[1].title}</div>
-          <div className="title">{movies[2].title}</div>
-          <div className="title">{movies[3].title}</div>
-          <div className="title">{movies[4].title}</div>
+        <div>
+          <MovieList movies={this.state.movies}/>
         </div>
       </div>
   )}
