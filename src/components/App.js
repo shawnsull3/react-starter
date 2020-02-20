@@ -2,25 +2,22 @@ import React from 'react';
 import Search from './Search.js';
 import '../main.css';
 import MovieList from './MovieList.js';
+import AddMovie from './AddMovie.js';
 
-var movies = [
-  {title: 'Mean Girls'},
-  {title: 'Hackers'},
-  {title: 'The Grey'},
-  {title: 'Sunshine'},
-  {title: 'Ex Machina'},
-];
+var movies = [];
 
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       movies: movies, //array of objs
-      text: ''
+      text: '',
+      inputMovie: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleText = this.handleText.bind(this);
-  
+    this.addMovie = this.addMovie.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   handleSubmit() {
@@ -33,8 +30,23 @@ class App extends React.Component {
     this.setState({movies: searchResult});
   }
 
-  handleText (e) {
+  handleText(e) {
     this.setState({ text: e.target.value });
+  }
+
+  handleInput(e) {
+    this.setState({ inputMovie: e.target.value });
+  }
+
+  addMovie() {
+    let inputObj = {
+      title: this.state.inputMovie
+    };
+
+    if (inputObj.title.length) {
+      movies.push(inputObj);
+    }
+    this.setState({movies: movies});
   }
 
   render(){
@@ -42,9 +54,16 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div>
-          <Search
-            handleText={this.handleText}
-            handleSubmit={this.handleSubmit}/>
+            <h4>Add Movie</h4>
+            <AddMovie 
+            addMovie={this.addMovie}
+            handleInput={this.handleInput}/>
+          </div>
+          <div>
+          <h4>Search</h4>
+            <Search
+              handleText={this.handleText}
+              handleSubmit={this.handleSubmit}/>
           </div>
         </nav>
         <div>
@@ -55,3 +74,14 @@ class App extends React.Component {
 }
 
 export default App;
+
+
+
+// var movies = [
+//   {title: 'Mean Girls'},
+//   {title: 'Hackers'},
+//   {title: 'The Grey'},
+//   {title: 'Sunshine'},
+//   {title: 'Ex Machina'},
+// ];
+
