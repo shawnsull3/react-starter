@@ -4,13 +4,13 @@ import '../main.css';
 import MovieList from './MovieList.js';
 import AddMovie from './AddMovie.js';
 
-var movies = [];
+var movieStorage = [];
 
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      movies: movies, //array of objs
+      movies: movieStorage, //array of objs
       text: '',
       inputMovie: ''
     }
@@ -18,11 +18,12 @@ class App extends React.Component {
     this.handleText = this.handleText.bind(this);
     this.addMovie = this.addMovie.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.watched = this.watched.bind(this);
   }
 
   handleSubmit() {
     let searchResult = [];
-    movies.map((movie) => {
+    movieStorage.map((movie) => {
       if (movie.title.indexOf(this.state.text) !== -1){
         searchResult.push(movie);
       }
@@ -40,13 +41,19 @@ class App extends React.Component {
 
   addMovie() {
     let inputObj = {
-      title: this.state.inputMovie
+      title: this.state.inputMovie,
+      watched: false
     };
 
     if (inputObj.title.length) {
-      movies.push(inputObj);
+      movieStorage.push(inputObj);
     }
-    this.setState({movies: movies});
+    this.setState({ movies: movieStorage });
+  }
+
+  watched (i) {
+    movieStorage[i].watched = !movieStorage[i].watched;
+    this.setState({movies: movieStorage});
   }
 
   render(){
@@ -67,7 +74,7 @@ class App extends React.Component {
           </div>
         </nav>
         <div>
-          <MovieList movies={this.state.movies}/>
+          <MovieList movies={this.state.movies} watched={this.watched}/>
         </div>
       </div>
   )}
@@ -78,8 +85,8 @@ export default App;
 
 
 // var movies = [
-//   {title: 'Mean Girls'},
-//   {title: 'Hackers'},
+//   {title: 'Mean Girls', watched: true},
+//   {title: 'Hackers', watched: false},
 //   {title: 'The Grey'},
 //   {title: 'Sunshine'},
 //   {title: 'Ex Machina'},
