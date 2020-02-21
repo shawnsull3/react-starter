@@ -19,6 +19,8 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.watched = this.watched.bind(this);
+    this.showWatched = this.showWatched.bind(this);
+    this.showUnwatched = this.showUnwatched.bind(this);
   }
 
   handleSubmit() {
@@ -56,6 +58,26 @@ class App extends React.Component {
     this.setState({movies: movieStorage});
   }
 
+  showWatched () {
+    let watchResult = [];
+    movieStorage.map((movie) => {
+      if (movie.watched){
+        watchResult.push(movie);
+      }
+    })
+    this.setState({movies: watchResult});
+  }
+
+  showUnwatched () {
+    let watchResult = [];
+    movieStorage.map((movie) => {
+      if (!movie.watched){
+        watchResult.push(movie);
+      }
+    })
+    this.setState({movies: watchResult});
+  }
+
   render(){
     return(
       <div>
@@ -73,6 +95,11 @@ class App extends React.Component {
               handleSubmit={this.handleSubmit}/>
           </div>
         </nav>
+        <div className="filter">
+          <button className="submitBtn" onClick={this.handleSubmit}>All Movies</button>
+          <button className="submitBtn" onClick={this.showWatched}>Watched</button>
+          <button className="submitBtn" onClick={this.showUnwatched}>To Watch</button>
+        </div>
         <div>
           <MovieList movies={this.state.movies} watched={this.watched}/>
         </div>
