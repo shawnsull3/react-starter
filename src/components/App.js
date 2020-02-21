@@ -26,7 +26,7 @@ class App extends React.Component {
   handleSubmit() {
     let searchResult = [];
     movieStorage.map((movie) => {
-      if (movie.title.indexOf(this.state.text) !== -1){
+      if (movie.title.toLowerCase().indexOf(this.state.text.toLowerCase()) !== -1){
         searchResult.push(movie);
       }
     })
