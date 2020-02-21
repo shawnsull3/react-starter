@@ -8,20 +8,26 @@
 }
 
 .searchbar {
-    margin: 3px;
+    margin: 5px;
+    width: 60%;
     align-items: center;
+    padding: 4px;
 }
 
 .inputbar {
-    margin: 3px;
+    margin: 5px;
+    width: 60%;
+    align-items: center;
+    padding: 4px;
 }
 
 .filter {
     border: 1px;
     border-style: solid;
     border-color: rgb(4, 85, 4);
-    margin: 2px;
+    margin: auto;
     background-color: lightgrey;
+    padding: 3px;
 }
 
 body {
@@ -34,16 +40,20 @@ body {
     border-color: darkgreen;
     border-radius: 10px;
     font-weight: bold;
-    margin: 3px;
+    margin: auto;
+    width: 33%;
 }
 
 .movieListEntry{
     background-color: lightgrey;
+    text-align: left;
 }
 
 .watchBtn {
     border-radius: 10px;
+    text-align: right;
 }
+
 
 .navbar {
     border: 1px;
@@ -59,4 +69,9 @@ body {
     border-color: rgb(4, 85, 4);
     margin: 2px;
     background-color: lightgrey;
+}
+
+h4 {
+    padding-left: 25px;
+    margin: 5px;
 }
